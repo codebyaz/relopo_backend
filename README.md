@@ -37,7 +37,7 @@ From within the project root directory ``/relopo`` make a copy of the file  ``.e
 
 Some of the resources throughout the application requires cache, so it is required to have ``Redis`` installed.
 
-ℹ️ For this project it's been used the image: https://hub.docker.com/r/bitnami/redis/
+ℹ️ For this project it's been used the image: https://hub.docker.com/r/redis/redis-stack
 
 Recommended to use a `Docker` container for it:
 

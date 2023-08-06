@@ -6,7 +6,7 @@ networks:
 
 services:
   redis-master:
-    image: 'bitnami/redis:latest'
+    image: 'redis/redis-stack:latest'
     ports:
       - '6379:6379'
     environment:
