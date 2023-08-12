@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'relopo.products'
+    'relopo.products',
+    'relopo.external',
 ]
 
 MIDDLEWARE = [
@@ -150,7 +151,6 @@ CACHES = {
         'LOCATION': config('REDIS_URL'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            "PASSWORD": config('REDIS_PASSWORD'),
         }
     }
 }
