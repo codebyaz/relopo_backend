@@ -23,12 +23,16 @@ from rest_framework_simplejwt.views import (
 from rest_framework import routers
 
 from .products.views import ProductViewSet
+from .external.views import ExternalView
+from .locations.views import CityViewSet
 
 router = routers.DefaultRouter()
 router.register(r'api/products', ProductViewSet, basename='products')
+router.register(r'api/cities', CityViewSet, basename='cities')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('api/external/load/ads', ExternalView.as_view(), name='external'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
