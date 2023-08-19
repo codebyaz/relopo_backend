@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'relopo.ads',
     'relopo.products',
     'relopo.external',
     'relopo.locations',
