@@ -9,8 +9,9 @@ class City(models.Model):
     
     class Countries(models.TextChoices):
         PORTUGAL = "PT", _("Portugal")
-        
+    
     name = models.CharField(max_length=100)
+    slug_name = models.SlugField(primary_key=True)
     center = models.CharField(max_length=50)
     radius = models.DecimalField(decimal_places=2, max_digits=10)
     is_active = models.BooleanField(default=True)

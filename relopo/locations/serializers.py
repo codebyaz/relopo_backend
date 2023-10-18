@@ -1,8 +1,9 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 from .models import City
 
-class CitySerializer(ModelSerializer):
+class CitySerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = City
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'slug_name']
