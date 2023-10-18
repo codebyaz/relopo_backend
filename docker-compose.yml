@@ -11,8 +11,9 @@ services:
       - '6379:6379'
     command:
       - redis-server
+      - --protected-mode no
       - --loglevel warning
-    environment:
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    # environment:
+    #   - REDIS_PASSWORD=${REDIS_PASSWORD}
     networks:
       - app-tier

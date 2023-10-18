@@ -11,23 +11,30 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 from decouple import config
+from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Custom environment variables access
+APP_BASE_URL = config('APP_BASE_URL')
+INTERNAL_REQUESTS_USERNAME = config('INTERNAL_REQUESTS_USERNAME')
 IDEALISTA_API_KEY = config('IDEALISTA_API_KEY')
 IDEALISTA_SECRET = config('IDEALISTA_SECRET')
 IDEALISTA_AUTH_URL = config('IDEALISTA_AUTH_URL')
 IDEALISTA_API_BASE_URL = config('IDEALISTA_API_BASE_URL')
-IDEALISTA_API_BASE_URL = config('REDIS_URL')
+REDIS_URL = config('REDIS_URL')
+CACHE_PREFIX_EXTERNAL_ADS_DATA = config('CACHE_PREFIX_EXTERNAL_ADS_DATA')
+CACHE_PREFIX_AUTH_DATA = config('CACHE_PREFIX_AUTH_DATA')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b1@#mz4z(f9b_l))*i+*e(1zcwk1fk^j8lo&m6-e+3z33pkftd'
+SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = 'django-insecure-b1@#mz4z(f9b_l))*i+*e(1zcwk1fk^j8lo&m6-e+3z33pkftd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_yasg',
     'relopo.ads',
     'relopo.products',
     'relopo.external',
@@ -144,10 +152,27 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME" : timedelta(minutes=60),
+    "SIGNING_KEY" : SECRET_KEY,
+}
+
+SWAGGER_SETTINGS = {
+    'DEFAULT_AUTO_SCHEMA_CLASS': 'drf_yasg.inspectors.SwaggerAutoSchema',
+    'SECURITY_DEFINITIONS': {
+        'Token': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+        },
+    },
 }
 
 CACHES = {
